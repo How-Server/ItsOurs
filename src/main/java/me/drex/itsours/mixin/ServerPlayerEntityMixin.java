@@ -25,7 +25,7 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Cl
 
 
     public ServerPlayerEntityMixin(World world, BlockPos pos, float yaw, GameProfile profile) {
-        super(world, pos, yaw, profile);
+        super(world, profile);
     }
 
     @Shadow

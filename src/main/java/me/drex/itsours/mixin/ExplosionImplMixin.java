@@ -30,7 +30,7 @@ public abstract class ExplosionImplMixin {
         method = {
             "getBlocksToDestroy",
             // lithium compat
-            "traverseBlock"
+//            "traverseBlock"
         },
         at = @At(
             value = "INVOKE",

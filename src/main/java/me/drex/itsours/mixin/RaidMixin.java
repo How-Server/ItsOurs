@@ -23,7 +23,7 @@ public abstract class RaidMixin extends PersistentState {
         long y = player.getBlockY();
         long z = player.getBlockZ();
         long distance = 64;
-        for (Entity entity : player.getServerWorld().getOtherEntities(player, new Box(
+        for (Entity entity : player.getWorld().getOtherEntities(player, new Box(
                 x - distance, y - distance, z - distance, x + distance, y + distance, z + distance
         ))) {
             if (entity instanceof VillagerEntity && ClaimList.getClaimAt(entity).isPresent() &&  !ClaimList.getClaimAt(entity).get().checkAction(null, Flags.MOB_SPAWN)) {

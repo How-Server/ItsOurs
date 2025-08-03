@@ -177,7 +177,7 @@ public abstract class AbstractClaim {
             player.networkHandler.sendPacket(new PlayerAbilitiesS2CPacket(player.getAbilities()));
 //        }
 
-        player.sendMessage(messages.enter().map(Text::literal).orElse(localized("text.itsours.claim.enter", placeholders(player.server))), true);
+        player.sendMessage(messages.enter().map(Text::literal).orElse(localized("text.itsours.claim.enter", placeholders(player.getServer()))), true);
     }
 
     public void onLeave(@Nullable AbstractClaim nextClaim, ServerPlayerEntity player) {
@@ -190,7 +190,7 @@ public abstract class AbstractClaim {
             if (cachedFlying && !player.getAbilities().flying) {
                 BlockPos pos = getPosOnGround(player.getBlockPos(), player.getWorld());
                 if (pos.getY() + 3 < player.getY()) {
-                    player.teleport(player.getServerWorld(), player.getX(), pos.getY(), player.getZ(), EnumSet.noneOf(PositionFlag.class), player.getYaw(), player.getPitch(), true);
+                    player.teleport(player.getWorld(), player.getX(), pos.getY(), player.getZ(), EnumSet.noneOf(PositionFlag.class), player.getYaw(), player.getPitch(), true);
                 }
             }
             requiresUpdate |= cachedFlying != player.getAbilities().flying;
@@ -198,7 +198,7 @@ public abstract class AbstractClaim {
             if (requiresUpdate) {
                 player.networkHandler.sendPacket(new PlayerAbilitiesS2CPacket(player.getAbilities()));
             }
-            player.sendMessage(messages.leave().map(Text::literal).orElse(localized("text.itsours.claim.leave", placeholders(player.server))), true);
+            player.sendMessage(messages.leave().map(Text::literal).orElse(localized("text.itsours.claim.leave", placeholders(player.getServer()))), true);
         }
     }
 

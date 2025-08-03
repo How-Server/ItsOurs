@@ -6,7 +6,7 @@ import me.drex.itsours.claim.flags.Flags;
 import net.minecraft.entity.ExperienceOrbEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -16,7 +16,8 @@ import java.util.Optional;
 @Mixin(value = ExperienceOrbEntity.class)
 public abstract class XpAbsorbMixin {
 
-    @Shadow private int amount;
+    @Unique
+    private int amount;
 
     @Inject(
             method = "onPlayerCollision",
