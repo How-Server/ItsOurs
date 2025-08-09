@@ -41,8 +41,8 @@ import static net.minecraft.world.Heightmap.Type.OCEAN_FLOOR;
 @Mixin(ServerPlayerEntity.class)
 public abstract class ServerPlayerEntityMixin extends PlayerEntity implements ClaimTrackingPlayer {
 
-    public ServerPlayerEntityMixin(World world, BlockPos pos, float yaw, GameProfile gameProfile) {
-        super(world, gameProfile);
+    public ServerPlayerEntityMixin(World world, GameProfile profile) {
+        super(world, profile);
     }
 
     private static final Predicate<BlockState> BLOCKS_MOVEMENT = AbstractBlock.AbstractBlockState::blocksMovement;

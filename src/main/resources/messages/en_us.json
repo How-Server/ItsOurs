@@ -31,6 +31,7 @@
   "text.itsours.commands.check.list.separator": "\n",
   "text.itsours.commands.check.list.list.entry": "<yellow>* <light_purple>${context} <gray>${flag}<yellow>:</yellow> ${value}",
   "text.itsours.commands.check.list.list.separator": "\n",
+  "text.itsours.commands.create": "Claim '${claim_name}' has been created successfully!",
   "text.itsours.commands.create.intersects": "Claim couldn't be created, because it would overlap with ${input}!",
   "text.itsours.commands.create.limit": "You can't have more than ${input} claims!",
   "text.itsours.commands.create.selectFirst": "You need to select the corners of your claim with a golden shovel (left- / right click) first.",
@@ -77,6 +78,8 @@
   "text.itsours.commands.remove.success": "Claim '${claim_full_name}' has been removed",
   "text.itsours.commands.rename.success": "Claim '${old_claim_full_name}' has been renamed to '${claim_full_name}'",
   "text.itsours.commands.setowner": "Set owner of '${claim_full_name}' to '${target_name}'",
+  "text.itsours.commands.show": "<green>Enabled claim show",
+  "text.itsours.commands.hide": "<red>Disabled claim show",
   "text.itsours.commands.trust": "<green>Trusted ${target_name} to ${claim_name}",
   "text.itsours.commands.trust.nothingChanged": "Nothing changed, ${target_name} is already trusted in ${claim_name}",
   "text.itsours.commands.distrust": "<red>Distrusted ${target_name} from ${claim_name}",
@@ -152,6 +155,9 @@
 
   "text.itsours.gui.flags.simple.glide.name": "<gold>Glide",
   "text.itsours.gui.flags.simple.glide.description": "<yellow>Use elytra in the claim",
+
+  "text.itsours.gui.flags.simple.claim_fly.name": "<gold>Claim fly",
+  "text.itsours.gui.flags.simple.claim_fly.description": "<yellow>Allow players to use claim fly",
 
   "text.itsours.gui.flags.simple.pvp.name": "<gold>PvP",
   "text.itsours.gui.flags.simple.pvp.description": "<yellow>Allow player vs player killing",
@@ -308,6 +314,7 @@
   "text.itsours.flags.modify.message.description": "Change claim enter- and leave message",
   "text.itsours.flags.modify.subzone.description": "Create claim subzones",
   "text.itsours.flags.modify.check.description": "Use /claim check command",
+  "text.itsours.flags.claim_fly.description": "Allow players to use claim fly",
   "text.itsours.flags.pvp.description": "Player vs Player",
   "text.itsours.flags.explosions.description": "Explosion block damage (eg. creeper explosion)",
   "text.itsours.flags.fluid_crosses_borders.description": "Fluids flowing across claim borders (eg. water flowing)",
