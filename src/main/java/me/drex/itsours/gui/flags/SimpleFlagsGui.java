@@ -33,7 +33,7 @@ public class SimpleFlagsGui extends PageGui<Flag> {
         Flag.flag(Flags.MINE),
         Flag.flag(Flags.DAMAGE_ENTITY),
         Flag.flag(Flags.GLIDE),
-        Flag.flag(Flags.CLAIM_FLY),
+//        Flag.flag(Flags.CLAIM_FLY),
         Flag.flag(Flags.PVP),
         Flag.flag(Flags.EXPLOSIONS),
         Flag.flag(Flags.MOB_SPAWN),
@@ -50,7 +50,7 @@ public class SimpleFlagsGui extends PageGui<Flag> {
         Flag.flag(Flags.INTERACT_ENTITY, Node.entity(EntityType.VILLAGER)),
         Flag.flag(Flags.INTERACT_ENTITY, Node.entity(EntityType.ARMOR_STAND)),
         Flag.flag(Flags.INTERACT_ENTITY, Node.entity(EntityType.ITEM_FRAME)),
-            /*---------------------------------------------*/
+        /*---------------------------------------------*/
         Flag.flag(Flags.INTERACT_BLOCK, Node.group(Registries.BLOCK, BlockTags.PRESSURE_PLATES)),
         Flag.flag(Flags.INTERACT_BLOCK, Node.group(Registries.BLOCK, BlockTags.BUTTONS)),
         Flag.flag(Flags.INTERACT_BLOCK, Node.group(Registries.BLOCK, BlockTags.FENCE_GATES)),
