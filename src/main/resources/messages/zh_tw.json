@@ -1,5 +1,5 @@
 {
-  "text.itsours.action.disallowed.interact_item": "<red>您無法在使用此物品",
+  "text.itsours.action.disallowed.interact_item": "<red>您無法在此使用此物品",
   "text.itsours.action.disallowed.interact_item_on_block": "<red>您無法對此方塊使用此物品",
   "text.itsours.action.disallowed.interact_entity": "<red>您無法在此與該實體互動",
   "text.itsours.action.disallowed.place_block": "<red>您無法在此放置方塊",
