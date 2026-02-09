@@ -11,6 +11,7 @@ import me.drex.itsours.util.ClaimFlags;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Tameable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.text.Text;
@@ -38,14 +39,14 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @Shadow public abstract boolean hasPermissionLevel(int level);
 
     @ModifyExpressionValue(
-        method = "attack",
+        method = "cannotAttack",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/entity/Entity;isAttackable()Z"
         )
     )
     private boolean itsours$canDamageEntity(boolean original, Entity entity) {
-        Optional<AbstractClaim> claim = ClaimList.getClaimAt(entity.getWorld(), entity.getBlockPos());
+        Optional<AbstractClaim> claim = ClaimList.getClaimAt(entity.getEntityWorld(), entity.getBlockPos());
         if (claim.isEmpty()) {
             return original;
         }
@@ -61,7 +62,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     }
 
     @ModifyExpressionValue(
-        method = "attack",
+        method = "doSweepingAttack",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/entity/player/PlayerEntity;squaredDistanceTo(Lnet/minecraft/entity/Entity;)D"
@@ -91,6 +92,10 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         )
     )
     private ActionResult itsours$canInteractEntity(Entity entity, PlayerEntity player, Hand hand, Operation<ActionResult> original) {
+        // special case to allow owners to interact with their entities
+        if (entity instanceof Tameable tameable && tameable.getOwner() == player) {
+            return original.call(entity, player, hand);
+        }
         return ClaimFlags.check(
             this,
             "text.itsours.action.disallowed.interact_entity",
