@@ -10,6 +10,8 @@ import me.drex.itsours.claim.Subzone;
 import me.drex.itsours.command.argument.ClaimArgument;
 import me.drex.itsours.data.DataManager;
 import me.drex.itsours.user.PlayerData;
+import net.minecraft.command.permission.Permission;
+import net.minecraft.command.permission.PermissionLevel;
 import net.minecraft.server.command.ServerCommandSource;
 
 import static me.drex.message.api.LocalizedMessage.localized;
@@ -59,7 +61,7 @@ public class RemoveCommand extends AbstractCommand {
     }
 
     public int executeRemove(ServerCommandSource src, AbstractClaim claim) throws CommandSyntaxException {
-        if ((claim.getOwner().equals(src.getEntityOrThrow().getUuid()) || src.hasPermissionLevel(4))
+        if ((claim.getOwner().equals(src.getEntityOrThrow().getUuid()) || src.getPermissions().hasPermission(new Permission.Level(PermissionLevel.OWNERS)))
                 && ItsOurs.checkPermission(src, "itsours.remove", 2)) {
             src.sendFeedback(() -> localized("text.itsours.commands.remove", claim.placeholders(src.getServer())), false);
             return 1;
@@ -69,7 +71,7 @@ public class RemoveCommand extends AbstractCommand {
     }
 
     public int executeRemoveConfirmed(ServerCommandSource src, AbstractClaim claim) throws CommandSyntaxException {
-        if ((claim.getOwner().equals(src.getEntityOrThrow().getUuid()) || src.hasPermissionLevel(4))
+        if ((claim.getOwner().equals(src.getEntityOrThrow().getUuid()) || src.getPermissions().hasPermission(new Permission.Level(PermissionLevel.OWNERS)))
                 && ItsOurs.checkPermission(src, "itsours.remove", 2)) {
             removeClaim(src, claim);
             src.sendFeedback(() -> localized("text.itsours.commands.remove.success", claim.placeholders(src.getServer())), false);

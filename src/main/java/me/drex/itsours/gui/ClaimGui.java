@@ -15,6 +15,8 @@ import me.drex.itsours.gui.util.BaseGui;
 import me.drex.itsours.gui.util.ConfirmationGui;
 import me.drex.itsours.gui.util.ValidStringInputGui;
 import me.drex.itsours.util.PlaceholderUtil;
+import net.minecraft.command.permission.Permission;
+import net.minecraft.command.permission.PermissionLevel;
 import net.minecraft.item.Items;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.text.Text;
@@ -50,7 +52,7 @@ public class ClaimGui extends BaseGui {
         if (advanced) {
             this.setSlot(2, switchElement(Items.HOPPER, "claim.groupmanager", new GroupManagerGui(context, claim)));
         }
-        if (claim.getOwner().equals(context.player.getUuid()) || context.player.hasPermissionLevel(4)) {
+        if (claim.getOwner().equals(context.player.getUuid()) || context.player.getPermissions().hasPermission(new Permission.Level(PermissionLevel.OWNERS))) {
 
             this.setSlot(6, switchElement(Items.NAME_TAG, "claim.rename", new ValidStringInputGui(context, claim.getName(), claim::canRename, input -> {
             switchUi(new ConfirmationGui(context, "text.itsours.gui.claim.rename.confirm", PlaceholderUtil.mergePlaceholderMaps(

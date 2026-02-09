@@ -8,6 +8,9 @@ import me.drex.itsours.claim.list.ClaimList;
 import me.drex.itsours.claim.flags.Flags;
 import me.drex.itsours.claim.flags.node.Node;
 import me.drex.itsours.util.ClaimFlags;
+import net.minecraft.command.permission.Permission;
+import net.minecraft.command.permission.PermissionLevel;
+import net.minecraft.command.permission.PermissionPredicate;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -35,8 +38,8 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Shadow
     public abstract void sendMessage(Text message, boolean actionBar);
-
-    @Shadow public abstract boolean hasPermissionLevel(int level);
+    @Shadow
+    public abstract PermissionPredicate getPermissions();
 
     @ModifyExpressionValue(
         method = "cannotAttack",
@@ -119,7 +122,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             () -> false,
             () -> original.call(instance),
             Flags.GLIDE
-        ) && (this.getWorld().getRegistryKey().equals(World.OVERWORLD) || this.getWorld().getRegistryKey().equals(World.NETHER) || this.getWorld().getRegistryKey().equals(World.END) || this.hasPermissionLevel(4));
+        ) && (this.getEntityWorld().getRegistryKey().equals(World.OVERWORLD) || this.getEntityWorld().getRegistryKey().equals(World.NETHER) || this.getEntityWorld().getRegistryKey().equals(World.END) || this.getPermissions().hasPermission(new Permission.Level(PermissionLevel.OWNERS)));
     }
 
 }

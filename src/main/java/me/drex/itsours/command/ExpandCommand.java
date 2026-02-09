@@ -7,10 +7,10 @@ import me.drex.itsours.claim.AbstractClaim;
 import me.drex.itsours.claim.Claim;
 import me.drex.itsours.claim.list.ClaimList;
 import me.drex.itsours.claim.Subzone;
-import me.drex.itsours.claim.flags.Flags;
-import me.drex.itsours.claim.flags.util.Modify;
 import me.drex.itsours.data.DataManager;
 import me.drex.itsours.util.ClaimBox;
+import net.minecraft.command.permission.Permission;
+import net.minecraft.command.permission.PermissionLevel;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -60,7 +60,7 @@ public class ExpandCommand extends AbstractCommand {
             return 0;
         }
         long areaIncrease = newArea - originalArea;
-        if (!claim.getOwner().equals(uuid) && !player.hasPermissionLevel(4)){
+        if (!claim.getOwner().equals(uuid) && !player.getPermissions().hasPermission(new Permission.Level(PermissionLevel.OWNERS))){
             src.sendError(localized("text.itsours.argument.general.missingPermission"));
             return 0;
         }

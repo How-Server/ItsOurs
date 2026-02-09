@@ -25,7 +25,7 @@ public abstract class XpAbsorbMixin {
             cancellable = true
     )
     private void itsours$xpAbsorb(PlayerEntity player, CallbackInfo ci) {
-        Optional<AbstractClaim> claim = ClaimList.getClaimAt(player.getWorld(), player.getSteppingPos());
+        Optional<AbstractClaim> claim = ClaimList.getClaimAt(player.getEntityWorld(), player.getSteppingPos());
         if (claim.isPresent() && !claim.get().checkAction(player.getUuid(), Flags.XP_ABSORB)) {
             ci.cancel();
             amount = 0;

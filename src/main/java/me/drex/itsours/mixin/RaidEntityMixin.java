@@ -31,7 +31,7 @@ public abstract class RaidEntityMixin extends PatrolEntity {
     @Inject(method = "tickMovement", at = @At("HEAD"))
     protected void tick(CallbackInfo ci) {
         Raid raid = this.getRaid();
-        Optional<AbstractClaim> claim = ClaimList.getClaimAt(this.getWorld(), this.getBlockPos());
+        Optional<AbstractClaim> claim = ClaimList.getClaimAt(this.getEntityWorld(), this.getBlockPos());
         if (claim.isPresent() && !claim.get().checkAction(null, Flags.MOB_SPAWN)) {
             assert raid != null;
             raid.getAllRaiders().forEach(raiderEntity -> raiderEntity.remove(RemovalReason.DISCARDED));

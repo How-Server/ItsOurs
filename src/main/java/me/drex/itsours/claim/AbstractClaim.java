@@ -22,6 +22,7 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -150,7 +151,8 @@ public abstract class AbstractClaim {
 
     public void onEnter(@Nullable AbstractClaim previousClaim, ServerPlayerEntity player) {
         boolean isAllowed = ItsOurs.checkPermission(player.getCommandSource(), "itsours.fly", 2) &&
-            checkAction(player.getUuid(), Flags.CLAIM_FLY);
+                (player.getEntityWorld().getRegistryKey().equals(ServerWorld.OVERWORLD) || player.getEntityWorld().getRegistryKey().equals(ServerWorld.NETHER) || player.getEntityWorld().getRegistryKey().equals(ServerWorld.END)) &&
+            checkAction(player.getUuid(), Flags.GLIDE);
         updateFly(player, isAllowed);
 
         player.sendMessage(messages.enter().map(Text::literal).orElse(localized("text.itsours.claim.enter", placeholders(player.getEntityWorld().getServer()))), true);

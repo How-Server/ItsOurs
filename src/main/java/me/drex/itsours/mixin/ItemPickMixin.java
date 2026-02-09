@@ -23,7 +23,7 @@ public abstract class ItemPickMixin {
             cancellable = true
     )
     private void itsours$itemPick(PlayerEntity player, CallbackInfo ci) {
-        Optional<AbstractClaim> claim = ClaimList.getClaimAt(player.getWorld(), player.getSteppingPos());
+        Optional<AbstractClaim> claim = ClaimList.getClaimAt(player.getEntityWorld(), player.getSteppingPos());
         if (claim.isPresent() && !claim.get().checkAction(player.getUuid(), Flags.ITEM_PICK)) {
             ci.cancel();
         }

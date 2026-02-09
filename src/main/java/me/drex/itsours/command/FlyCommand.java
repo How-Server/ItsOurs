@@ -29,9 +29,9 @@ public class FlyCommand extends ToggleCommand {
         ServerPlayerEntity player = src.getPlayer();
         if (ClaimList.getClaimAt(player).isPresent()
             && ClaimList.getClaimAt(player).get().checkAction(null, Flags.GLIDE)
-            && (player.getWorld().getRegistryKey().equals(World.OVERWORLD)
-            || player.getWorld().getRegistryKey().equals(World.END)
-            || player.getWorld().getRegistryKey().equals(World.NETHER))) {
+            && (player.getEntityWorld().getRegistryKey().equals(World.OVERWORLD)
+            || player.getEntityWorld().getRegistryKey().equals(World.END)
+            || player.getEntityWorld().getRegistryKey().equals(World.NETHER))) {
             player.interactionManager.getGameMode().setAbilities(player.getAbilities());
             if (newValue) {
                 player.getAbilities().allowFlying = true;
