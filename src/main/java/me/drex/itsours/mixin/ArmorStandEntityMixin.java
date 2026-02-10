@@ -13,6 +13,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.explosion.Explosion;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -44,4 +45,12 @@ public abstract class ArmorStandEntityMixin extends LivingEntity {
         }
     }
 
+    @Inject(method = "isImmuneToExplosion", at = @At("HEAD"), cancellable = true)
+    private void cancelExplosion(Explosion explosion, CallbackInfoReturnable<Boolean> cir) {
+        Optional<AbstractClaim> claim = ClaimList.getClaimAt(this.getEntityWorld(), this.getBlockPos());
+        if (claim.isEmpty()) return;
+        if (!claim.get().checkAction(null, Flags.EXPLOSIONS)) {
+            cir.setReturnValue(true);
+        }
+    }
 }

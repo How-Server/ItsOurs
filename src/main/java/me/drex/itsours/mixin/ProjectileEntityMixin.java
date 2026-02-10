@@ -6,6 +6,8 @@ import me.drex.itsours.claim.flags.Flags;
 import me.drex.itsours.claim.flags.node.Node;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.decoration.AbstractDecorationEntity;
+import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -42,6 +44,13 @@ public abstract class ProjectileEntityMixin extends Entity {
     )
     public void itsours$canDamageEntity(ProjectileEntity entity, EntityHitResult hitResult) {
         Optional<AbstractClaim> claim = ClaimList.getClaimAt(hitResult.getEntity());
+        if (claim.isPresent() && !claim.get().checkAction(null, Flags.MINE) &&
+            (hitResult.getEntity() instanceof ArmorStandEntity || hitResult.getEntity() instanceof AbstractDecorationEntity)) {
+            if (entity instanceof PersistentProjectileEntity) {
+                if (((PersistentProjectileEntity) entity).getPierceLevel() > 0) entity.kill((ServerWorld) entity.getEntityWorld());
+            }
+            return;
+        }
         if (claim.isEmpty() || !(entity.getOwner() instanceof ServerPlayerEntity)) {
             this.onEntityHit(hitResult);
             return;
